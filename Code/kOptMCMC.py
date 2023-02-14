@@ -8,6 +8,7 @@ import os
 
 
 sys.path.insert(1, '..\Maps\Berkeley')
+filepath = "kOptMCMC_berkeley" 
 import sumoMCMCconfig as MCMCconfig
 
 
@@ -393,23 +394,14 @@ if __name__ == "__main__":
     for i in range(len(k_opt_array)):
         final_kval = max(final_kval,max(k_opt_array[i]))
     time_interval = 5
-    pathlength = 0
 
-    for i in combined_currcapacity:
-        if i[0] == 'virtual_source' or i[0] =='virtual_sink' or i[1] == 'virtual_source' or i[1] =='virtual_sink':
-            continue
-        pathlength += abs(combined_currcapacity[i])*EdgeLength[i]
-    #since we consider both - and + for the same edge in curr capacity
-    pathlength/=2 
-    #since we are taking average len of path we divide by total number of mf solutions and paths per mf solution
-    pathlength = pathlength/(num_sol* maxflow_value)
-    filepath = "newkoptmcmcmulti_berkeley" 
+    
     if isMultiSource:
         filepath = filepath+"virtual"
     
     with open(filepath + 'numsol.csv',mode = 'a') as f:
         fwriter = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        fwriter.writerow([alpha,lamda,num_iter,pathlength,final_kval,exectime])
+        fwriter.writerow([alpha,lamda,num_iter,final_kval,exectime])
         f.close() 
         
     filepath1 = filepath + str(int(alpha*100))+"A" + str(num_iter) + "I" + str(int(lamda*100)) + "l"
