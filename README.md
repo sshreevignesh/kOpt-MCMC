@@ -50,6 +50,6 @@ python3 edgepollutionfileparser.py additionaloutput 7
 This will print the Mean,Max and Total pollution for the simulation. In order to generate the Heatmaps, we can run the following command 
 
 ```
-python3 generateHeatlines.py nox_heatline.py <MapName>
+python3 generateHeatlines.py nox_heatline.csv <MapName>
 ```
-The above command will create the heatmap and save it as an HTML file
+The above command will create the heatmap and save it as an HTML file. In order to recreate the heatmaps in the paper, you can use the `Heatmapfiles` folder, and replace `nox_heatline.csv` with the corresponding file for the map you want to use
